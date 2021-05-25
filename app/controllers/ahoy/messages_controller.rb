@@ -21,9 +21,17 @@ module Ahoy
 
     def click
       # TODO move to MessageSubscriber in 2.0
-      if @message && !@message.clicked_at
+      prev = !@message.clicked_at
+      
+      if @message
         @message.clicked_at = Time.now
+      end
+
+      if @message && prev
         @message.opened_at ||= @message.clicked_at if @message.respond_to?(:opened_at=)
+      end
+
+      if @message
         @message.save!
       end
 
