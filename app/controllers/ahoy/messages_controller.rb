@@ -21,7 +21,7 @@ module Ahoy
 
     def click
       # TODO move to MessageSubscriber in 2.0
-      prev = !@message.clicked_at
+      prev = !@message&.clicked_at
       
       if @message
         @message.clicked_at = Time.now
